@@ -5,11 +5,12 @@ on:
   workflow_dispatch:
     branches:
       - main
-    gradle_debug_params:
-      description: 'Gradle Debug Params'
-      default: ''
-      required: false
-      type: string
+    inputs:  
+      gradle_debug_params:
+        description: 'Gradle Debug Params'
+        default: ''
+        required: false
+        type: string
   push:
     branches:
       - main
@@ -28,10 +29,10 @@ jobs:
         node_version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node_version }}
-      uses: actions/setup-node@v2
-      with:
-        node_version: ${{ matrix.node_version }}
-    - run: npm install
-    - run: npm run unit
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v2
+        with:
+          node_version: ${{ matrix.node_version }}
+      - run: npm install
+      - run: npm run unit
