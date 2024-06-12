@@ -2,9 +2,9 @@
   <div>
     <button @click="incrementPage">Next Page</button>
     <div class="grid">
-      <div class="card" v-for="user in users" :key="user.login.uuid">
-        <img :src="user.picture.medium" alt="User Image">
-        <p>{{ user.name.first }} {{ user.name.last }}</p>
+      <div class="card" v-for="user in users" :key="user?.login?.uuid">
+        <img :src="user?.picture?.medium" alt="User Image" />
+        <p>{{ user?.name?.first }} {{ user?.name?.last }}</p>
       </div>
     </div>
   </div>
@@ -20,11 +20,9 @@ export default {
   },
   methods: {
     fetchUsers() {
-      fetch(`https://randomuser.me/api?page=${this.apiPage}`)
-        .then(response => response.json())
-        .then(data => {
-          this.users = data.results;
-        });
+      fetch(`https://randomuser.me/api?page=${this.apiPage}`).then((data) => {
+        this.users.push(data);
+      });
     },
     incrementPage() {
       this.apiPage += 1;
@@ -42,6 +40,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+
 .card {
   margin: 10px;
   padding: 10px;
