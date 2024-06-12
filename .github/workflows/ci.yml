@@ -5,19 +5,11 @@ on:
   workflow_dispatch:
     branches:
       - main
-    inputs:  
-      gradle_debug_params:
-        description: 'Gradle Debug Params'
-        default: ''
-        required: false
-        type: string
   push:
     branches:
       - main
     paths:
       - src/**
-      - gradle/*.gradle
-      - build.gradle
     
 jobs:
   build:
@@ -26,7 +18,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node_version: [14.x]
+        node_version: [20.x]
 
     steps:
       - uses: actions/checkout@v2
